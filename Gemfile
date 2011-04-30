@@ -8,6 +8,7 @@ gem 'rails', '3.0.4.rc1'
 
 gem 'sqlite3'
 gem 'haml'
+gem 'geokit'
 
 # Use unicorn as the web server
 # gem 'unicorn'
