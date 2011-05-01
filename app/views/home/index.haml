@@ -47,7 +47,7 @@
       %th Email
       -@posts.select{|p| p.buying_or_selling == "buy"}.each do |post|
         %tr
-          %td="#{number_with_precision(post.distance)} kilometers"
+          %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers"
           %td=mail_to(post.email)
       
   #right
@@ -58,7 +58,7 @@
       %th Email
       -@posts.select{|p| p.buying_or_selling == "sell"}.each do |post|
         %tr
-          %td="#{number_with_precision(post.distance)} kilometers"
+          %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers"
           %td=mail_to(post.email)
   .clear
     
