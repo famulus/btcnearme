@@ -3,8 +3,8 @@ class CreatePosts < ActiveRecord::Migration
 		create_table :posts do |t|
 			t.string  :buying_or_selling
 			t.string  :email
-			t.string  :lat
-			t.string  :lng
+			t.decimal  :lat
+			t.decimal  :lng
 			
 			t.timestamps
 		end
