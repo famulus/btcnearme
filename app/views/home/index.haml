@@ -45,10 +45,10 @@
   %table
     %th Distance
     %th Email
-  -@posts.select{|p| p.buying_or_selling == "buy"}.each do |post|
-    %tr
-      %td=post.distance
-      %td=post.email
+    -@posts.select{|p| p.buying_or_selling == "buy"}.each do |post|
+      %tr
+        %td=post.distance
+        %td=post.email
       
 #right
   Sellers
