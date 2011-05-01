@@ -38,3 +38,6 @@ YOUR LOCATION IS
         -post.attributes.keys.each do |attribute|
           %td=post.attributes[attribute].to_s
     
+-if @posts.blank?
+  You are the first person to trade BTC in this area! 
+  
