@@ -18,7 +18,7 @@ class HomeController < ApplicationController
 
 		@post.update_attributes(params[:post])
 		@post.save
-		redirect_to({controller: :home,action: :index})
+		# redirect_to({controller: :home,action: :index})
 		
 	end
 	
