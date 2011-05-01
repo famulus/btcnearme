@@ -2,7 +2,7 @@
   BTC NEAR ME
   
 %h2
-  Find Bitcoin traders near you... settle in cash in person.
+  Find Bitcoin traders near you... settle in cash.
 	
 / %hr
 	
@@ -47,7 +47,7 @@
       %th Email
       -@posts.select{|p| p.buying_or_selling == "buy"}.each do |post|
         %tr
-          %td=post.distance
+          %td="#{number_with_precision(post.distance)} kilometers"
           %td=mail_to(post.email)
       
   #right
@@ -58,7 +58,7 @@
       %th Email
       -@posts.select{|p| p.buying_or_selling == "sell"}.each do |post|
         %tr
-          %td=post.distance
+          %td="#{number_with_precision(post.distance)} kilometers"
           %td=mail_to(post.email)
   .clear
     
