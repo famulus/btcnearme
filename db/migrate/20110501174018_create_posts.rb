@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration
 			t.string  :email
 			t.decimal  :lat
 			t.decimal  :lng
+			t.decimal  :quantity
 			
 			t.timestamps
 		end

@@ -20,8 +20,9 @@ ActiveRecord::Schema.define(:version => 20110501174018) do
   create_table "posts", :force => true do |t|
     t.string   "buying_or_selling"
     t.string   "email"
-    t.string   "lat"
-    t.string   "lng"
+    t.decimal  "lat"
+    t.decimal  "lng"
+    t.decimal  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
