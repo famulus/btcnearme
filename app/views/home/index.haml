@@ -48,17 +48,17 @@
     -@posts.select{|p| p.buying_or_selling == "buy"}.each do |post|
       %tr
         %td=post.distance
-        %td=post.email
+        %td=mail_to(post.email)
       
 #right
   Sellers
   %table
-  -@posts.first.attributes.keys.each do |attribute|
-    %th=attribute
-  -@posts.select{|p| p.buying_or_selling == "sell"}.each do |post|
-    %tr
-      -post.attributes.keys.each do |attribute|
-        %td=post.attributes[attribute].to_s
+    %th Distance
+    %th Email
+    -@posts.select{|p| p.buying_or_selling == "sell"}.each do |post|
+      %tr
+        %td=post.distance
+        %td=mail_to(post.email)
 .clear
     
 / -if @posts.blank?
