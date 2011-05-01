@@ -17,8 +17,8 @@ class HomeController < ApplicationController
 		@post = Post.new
 
 		@post.update_attributes(params[:post])
-		@post.lat = MultiGeocoder.geocode(@post.zip_code).lat.to_s rescue nil
-		@post.lng = MultiGeocoder.geocode(@post.zip_code).lng.to_s rescue nil
+		@post.lat = MultiGeocoder.geocode(@post.zip_code.to_s).lat rescue nil
+		@post.lng = MultiGeocoder.geocode(@post.zip_code.to_s).lng rescue nil	
 		
 		@post.save
 		cookies[:zip_code] = @post.zip_code
