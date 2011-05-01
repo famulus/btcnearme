@@ -11,7 +11,7 @@ class HomeController < ApplicationController
 
 		@post = Post.new
 		if cookies[:zip_code].present?
-			@posts = Post.within(5, :origin =>cookies[:zip_code],:order=>'distance')
+			@posts = Post.within(6, :origin =>cookies[:zip_code],:order=>:distance)
 		end
 	end
 
