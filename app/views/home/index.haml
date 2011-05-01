@@ -33,6 +33,8 @@
 
 %hr
 -if @posts.present?
+  %p=cookies[:zip_code]
+    
   %table
     -@posts.first.attributes.keys.each do |attribute|
       %th=attribute
