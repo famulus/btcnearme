@@ -2,7 +2,7 @@
 #   gem install sqlite3
 
 common_config: &common_config
-  adapter: mysql
+  adapter: sqlite3
 
 
 development:

@@ -10,7 +10,7 @@ gem 'rails', '3.0.4.rc1'
 gem 'sqlite3'
 gem 'haml'
 gem 'geokit'
-gem 'mysql2'
+gem 'mysql'
 # gem "activerecord-mysql2-adapter"
 
 # Use unicorn as the web server
