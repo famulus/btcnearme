@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 		# render(text: near)
 		# geocode_ip_address
 		
-		
+		ActiveRecord::Base.connection.execute("show databases")
 		
 	end
 	
