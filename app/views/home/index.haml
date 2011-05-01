@@ -14,7 +14,7 @@ YOUR LOCATION IS
 =@location.inspect 
 
 %hr
-=form_for(:post, @post, :url => {controller: :home,action: :create_post}) do |f|
+=form_for(:post, @post, :url => {:controller => :home,:action => :create_post}) do |f|
   I want to 
   =select_tag(:buying_or_selling, options_for_select(["buy","sell"]))
   =f.text_field(:quantity)
