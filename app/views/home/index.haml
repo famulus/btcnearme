@@ -14,12 +14,26 @@ YOUR LOCATION IS
 =@location.inspect 
 
 %hr
-=form_tag({:action  => :post}) do
+=form_for(:post, @post, url: {controller: :home,action: :create_post}) do |f|
   I want to 
   =select_tag(:buying_or_selling, options_for_select(["buy","sell"]))
-  =text_field_tag(:quantity)
+  =f.text_field(:quantity)
   BTC
   %br/
+  Near zip code: 
+  =f.text_field(:zip_code)
+
+  %br/
   Interested traders can contact me at this email:
-  =text_field_tag(:email)
+  =f.text_field(:email)
   =submit_tag("Post")
+
+%hr
+  %table
+    -@posts.first.attributes.keys.each do |attribute|
+      %th=attribute
+    -@posts.each do |post|
+      %tr
+        -post.attributes.keys.each do |attribute|
+          %td=post.attributes[attribute].to_s
+    

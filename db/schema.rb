@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20110501174018) do
     t.decimal  "lat"
     t.decimal  "lng"
     t.decimal  "quantity"
+    t.integer  "zip_code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -6,6 +6,7 @@ class CreatePosts < ActiveRecord::Migration
 			t.decimal  :lat
 			t.decimal  :lng
 			t.decimal  :quantity
+			t.integer :zip_code
 			
 			t.timestamps
 		end
