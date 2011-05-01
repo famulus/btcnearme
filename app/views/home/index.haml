@@ -29,6 +29,7 @@ YOUR LOCATION IS
   =submit_tag("Post")
 
 %hr
+-if @posts
   %table
     -@posts.first.attributes.keys.each do |attribute|
       %th=attribute
