@@ -8,4 +8,5 @@ class Post < ActiveRecord::Base
 
 	validates_numericality_of :zip_code
 	validates_presence_of :email
+	validates_uniqueness_of :email, :scope => :buying_or_selling
 end
