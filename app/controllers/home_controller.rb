@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 		# render(text: near)
 		# geocode_ip_address
 		
-		# Post.find(:all, :origin =>[37.792,-122.393], :within=>10)
+		Post.find(:all, :origin =>[37.792,-122.393], :within=>10)
 		
 	end
 	
