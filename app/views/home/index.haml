@@ -40,27 +40,27 @@
     Traders near 
     =cookies[:zip_code]
 
-#left
-  %h3 Buying BTC
-  %table
-    %th Distance
-    %th Email
-    -@posts.select{|p| p.buying_or_selling == "buy"}.each do |post|
-      %tr
-        %td=post.distance
-        %td=mail_to(post.email)
+  #left
+    %h3 Buying BTC
+    %table
+      %th Distance
+      %th Email
+      -@posts.select{|p| p.buying_or_selling == "buy"}.each do |post|
+        %tr
+          %td=post.distance
+          %td=mail_to(post.email)
       
-#right
-  %h3 Selling BTC
+  #right
+    %h3 Selling BTC
   
-  %table
-    %th Distance
-    %th Email
-    -@posts.select{|p| p.buying_or_selling == "sell"}.each do |post|
-      %tr
-        %td=post.distance
-        %td=mail_to(post.email)
-.clear
+    %table
+      %th Distance
+      %th Email
+      -@posts.select{|p| p.buying_or_selling == "sell"}.each do |post|
+        %tr
+          %td=post.distance
+          %td=mail_to(post.email)
+  .clear
     
 / -if @posts.blank?
 /   You are the first person to trade BTC in this area! 
