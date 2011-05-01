@@ -10,7 +10,9 @@ class HomeController < ApplicationController
 
 
 		@post = Post.new
-		@posts = Post.all
+		if cookies[:zip_code].present?
+			@posts = Post.within(5, :origin =>cookies[:zip_code])
+		end
 	end
 
 	def create_post
@@ -19,7 +21,7 @@ class HomeController < ApplicationController
 		@post.update_attributes(params[:post])
 		@post.lat = MultiGeocoder.geocode(@post.zip_code.to_s).lat rescue nil
 		@post.lng = MultiGeocoder.geocode(@post.zip_code.to_s).lng rescue nil	
-		
+
 		@post.save
 		cookies[:zip_code] = @post.zip_code
 		redirect_to({:controller => :home,:action => :index})
