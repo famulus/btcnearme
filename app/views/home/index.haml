@@ -7,7 +7,8 @@
 
 %hr
 =form_for(:post, @post, :url => {:controller => :home,:action => :create_post}) do |f|
-  .flash.error=@post.errors.full_messages.join(", ")
+  .flash.error
+    =@post.errors.full_messages.join(", ")
 
   I want to 
   =f.select(:buying_or_selling, options_for_select(["buy","sell"]))
