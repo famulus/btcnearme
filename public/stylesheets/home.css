@@ -4,8 +4,8 @@
 .clear { clear: both; }
 
 .flash {
-    text-align: center;
-    padding:    .3em .4em;
+/*    text-align: center;*/
+    /*padding*/:    .3em .4em;
     margin:             0 auto .5em;
     clear:              both;
     max-width:  46.923em; /* 610/13 */  
@@ -13,7 +13,7 @@
 }
 
 .flash.error {
-    border: thin solid #8b0000;
+/*    bord	er: thin solid #8b0000;*/
     background: #ffc0cb;
 }
 
