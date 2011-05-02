@@ -32,12 +32,9 @@
 
 
 -if @posts.present?
-  %p
-    Traders near 
-    =cookies[:zip_code]
-
+   
   #left
-    %h3 Buying BTC
+    %h3="Buying BTC near #{ cookies[:zip_code]}"
     %table
       %th Distance
       %th Email
@@ -47,7 +44,7 @@
           %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}",:encode => "javascript"})
       
   #right
-    %h3 Selling BTC
+    %h3="Selling BTC near #{ cookies[:zip_code]}"
   
     %table
       %th Distance
@@ -55,7 +52,7 @@
       -@posts.select{|p| p.buying_or_selling == "sell"}.each do |post|
         %tr
           %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers" rescue ""
-          %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}",:encode => "javascript"})
+          %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}"})
   .clear
     
 / -if @posts.blank?
