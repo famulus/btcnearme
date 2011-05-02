@@ -3,9 +3,9 @@ class HomeController < ApplicationController
 	def index
 		@post = Post.new
 		if cookies[:zip_code].present?
-			# @posts = Post.within(20, :origin =>cookies[:zip_code],:order=>'distance')
-			# @posts.sort_by_distance_from(cookies[:zip_code])
-			@posts = Post.all
+			@posts = Post.within(20, :origin =>cookies[:zip_code],:order=>'distance')
+			@posts.sort_by_distance_from(cookies[:zip_code])
+			# @posts = Post.all
 		end
 	end
 
