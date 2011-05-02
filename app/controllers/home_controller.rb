@@ -20,7 +20,7 @@ class HomeController < ApplicationController
 
 		@post.save
 		cookies[:zip_code] = @post.zip_code if @post.zip_code.present?
-		redirect_to({:controller => :home,:action => :index})
+		redirect_to({:controller => :home,:action => :index}, {:error => flash[:error]})
 
 	end
 
