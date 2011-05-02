@@ -3,9 +3,9 @@ class HomeController < ApplicationController
 	def index
 		@post = Post.new
 		if cookies[:zip_code].present?
-			@posts = Post.within(20, :origin =>cookies[:zip_code],:order=>'distance')
-			@posts.sort_by_distance_from(cookies[:zip_code])
-			# @posts = Post.all
+			# @posts = Post.within(20, :origin =>cookies[:zip_code],:order=>'distance')
+			# @posts.sort_by_distance_from(cookies[:zip_code])
+			@posts = Post.all
 		end
 	end
 
@@ -20,7 +20,7 @@ class HomeController < ApplicationController
 
 		@post.save
 		cookies[:zip_code] = @post.zip_code if @post.zip_code.present?
-		redirect_to({:controller => :home,:action => :index}, {:error => flash[:error]})
+		redirect_to({:controller => :home,:action => :index}, :flash => {:error => @post.errors.full_messages.join(", ")})
 
 	end
 

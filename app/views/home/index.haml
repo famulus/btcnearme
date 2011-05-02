@@ -6,9 +6,9 @@
 	
 
 %hr
-=form_for(:post, @post, :url => {:controller => :home,:action => :create_post}) do |f|
+=form_for(@post, :url => {:controller => :home,:action => :create_post}) do |f|
   .flash.error
-    =@post.errors.full_messages.join(", ")
+    =flash[:error]
 
   I want to 
   =f.select(:buying_or_selling, options_for_select(["buy","sell"]))
@@ -41,7 +41,7 @@
       %th Email
       -@posts.select{|p| p.buying_or_selling == "buy"}.each do |post|
         %tr
-          %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers"
+          %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers" rescue ""
           %td=mail_to(post.email)
       
   #right
@@ -52,7 +52,7 @@
       %th Email
       -@posts.select{|p| p.buying_or_selling == "sell"}.each do |post|
         %tr
-          %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers"
+          %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers" rescue ""
           %td=mail_to(post.email)
   .clear
     
