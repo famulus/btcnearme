@@ -18,7 +18,7 @@ class HomeController < ApplicationController
 		@post.lat = MultiGeocoder.geocode(@post.zip_code.to_s).lat rescue nil
 		@post.lng = MultiGeocoder.geocode(@post.zip_code.to_s).lng rescue nil	
 
-		if @post.save
+		@post.save
 		cookies[:zip_code] = @post.zip_code if @post.zip_code.present?
 		redirect_to({:controller => :home,:action => :index})
 
