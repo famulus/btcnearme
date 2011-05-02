@@ -16,7 +16,7 @@
 
 %hr
 =form_for(:post, @post, :url => {:controller => :home,:action => :create_post}) do |f|
-  =f.errors.full_messages.join(", ")
+  =@post.errors.full_messages.join(", ")
 
   I want to 
   =f.select(:buying_or_selling, options_for_select(["buy","sell"]))
