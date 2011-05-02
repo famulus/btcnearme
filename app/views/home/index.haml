@@ -4,15 +4,6 @@
 %h2
   Find Bitcoin traders near you... settle in cash.
 	
-/ %hr
-	
-/ YOUR IP IS:
-/ =request.remote_ip
-/ 
-/ %hr
-/ 
-/ YOUR LOCATION IS 
-/ =@location.inspect 
 
 %hr
 =form_for(:post, @post, :url => {:controller => :home,:action => :create_post}) do |f|
