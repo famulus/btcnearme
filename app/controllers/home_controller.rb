@@ -7,7 +7,7 @@ class HomeController < ApplicationController
 				@posts = Post.within(20, :origin =>"#{cookies[:zip_code]}, #{IpGeocoder.geocode(request.remote_ip).country_code}",:order=>'distance')
 				@posts.sort_by_distance_from(cookies[:zip_code])
 			end
-			 @posts = Post.all if Rails.env == "development"
+			@posts = Post.all if Rails.env == "development"
 		end
 	end
 
@@ -22,10 +22,20 @@ class HomeController < ApplicationController
 
 		@post.save
 		cookies[:zip_code] = @post.zip_code if @post.zip_code.present?
+		cookies[:email] = @post.email if @post.valid?
 		redirect_to({:controller => :home,:action => :index}, :flash => {:error => @post.errors.full_messages.join(", ")})
 
 	end
 
+	def delete_post
+		if cookies[:email] == params[:email]
+			p =Post.find_by_email(params[:email])
+			p.destroy
+
+		end
+		redirect_to({:controller => :home,:action => :index}, :flash => {:notice => "Email deleted sucessfully"})
+
+	end 
 
 
 

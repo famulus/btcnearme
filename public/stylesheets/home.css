@@ -1,7 +1,7 @@
-/** { margin: 0; padding: 0; }*/
+* { margin: 10px; padding: 0; }
 * {font-family: sans-serif;}
-#left { float: left; width: 50%; }
-#right { float:left; width: 50%; }
+#left { float: left; width: 50%;margin:0 }
+#right { float:left; width: 50%;margin:0 }
 .clear { clear: both; }
 
 .flash {
@@ -19,7 +19,7 @@
 }
 
 .flash.notice, .flash.info {
-    border: thin solid #ff0;
+/*    border: thin solid #ff0;*/
     background: #ffe;
 }
 
@@ -28,3 +28,12 @@
     background: #ff0;
 }
 
+.button_to{
+	margin:0;
+	
+}
+.button_to div{
+	margin:0;
+}.button_to input{
+	margin:0;
+}

@@ -11,6 +11,8 @@
 =form_for(@post, :url => {:controller => :home,:action => :create_post}) do |f|
   .flash.error
     =flash[:error]
+  .flash.notice
+    =flash[:notice]
 
   I want to 
   =f.select(:buying_or_selling, options_for_select(["buy","sell"]))
@@ -21,11 +23,11 @@
   =f.text_field(:zip_code)
 
   %br/
-  Interested traders can contact me at this email:
+  Interested traders email me at:
   =f.text_field(:email)
   =submit_tag("Post")
   %br/
-  (email listed publicly)
+  (emails shown publicly)
 
 %hr
 
@@ -34,7 +36,7 @@
 -if @posts.present?
    
   #left
-    %h3="Buying BTC near #{ cookies[:zip_code]}"
+    %h4="Buying BTC near #{ cookies[:zip_code]}"
     %table
       %th Distance
       %th Email
@@ -42,9 +44,10 @@
         %tr
           %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers" rescue ""
           %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}",:encode => "javascript"})
+          %td.button_to=button_to("delete",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
       
   #right
-    %h3="Selling BTC near #{ cookies[:zip_code]}"
+    %h4="Selling BTC near #{ cookies[:zip_code]}"
   
     %table
       %th Distance
@@ -53,6 +56,8 @@
         %tr
           %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers" rescue ""
           %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}"})
+          %td.button_to=button_to("delete",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
+
   .clear
     
 / -if @posts.blank?
