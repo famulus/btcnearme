@@ -28,4 +28,7 @@ ActiveRecord::Schema.define(:version => 20110501174018) do
     t.datetime "updated_at"
   end
 
+  add_index "posts", ["lat"], :name => "index_posts_on_lat"
+  add_index "posts", ["lng"], :name => "index_posts_on_lng"
+
 end

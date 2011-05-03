@@ -10,6 +10,8 @@ class CreatePosts < ActiveRecord::Migration
 			
 			t.timestamps
 		end
+		add_index(:posts,:lat)
+		add_index(:posts,:lng)
 	end
 
 	def self.down
