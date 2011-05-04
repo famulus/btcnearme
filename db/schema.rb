@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110501174018) do
+ActiveRecord::Schema.define(:version => 20110504041535) do
 
   create_table "locations", :force => true do |t|
     t.datetime "created_at"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20110501174018) do
     t.decimal  "lat"
     t.decimal  "lng"
     t.decimal  "quantity"
-    t.integer  "zip_code"
+    t.string   "zip_code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
