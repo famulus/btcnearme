@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
 										:lng_column_name => :lng
 
 
-	validates_numericality_of :zip_code
+	validates_presence_of :zip_code
 	validates_presence_of :email
 	validates_uniqueness_of :email, :scope => :buying_or_selling
 end
