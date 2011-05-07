@@ -1,0 +1,21 @@
+!!! 
+%html
+  %head
+    = stylesheet_link_tag :all 
+    = javascript_include_tag :defaults 
+    = csrf_meta_tag
+
+    %title BTC NEAR ME
+  %body
+    #wrap
+      #main.clearfix
+        =yield
+    #footer
+      .div
+        Donations: 1LrN9iduKqYtxzWYzjXFLfq7pbKbKikcJy
+      .div
+        Admin: 
+        =mail_to("famulus.fusion@gmail.com",nil,{:subject => "BTC NEAR ME",:encode => "javascript"})
+      .div 
+        Source Code:
+        =link_to("https://github.com/famulus/btcnearme")
