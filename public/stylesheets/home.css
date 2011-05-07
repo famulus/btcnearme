@@ -1,4 +1,4 @@
-#main * { margin: 10px; padding: 0; }
+* { margin: 10px; padding: 0; }
 * {font-family: sans-serif;}
 #left { float: left; width: 50%;margin:0 }
 #right { float:left; width: 50%;margin:0 }
@@ -42,4 +42,5 @@
 #footer{
 	margin-top:200px;
 }
+
 
