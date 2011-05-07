@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 		@post = Post.new
 		if cookies[:zip_code].present?
 			if Rails.env == "production"
-				@posts = Post.within(20, :origin =>"#{cookies[:zip_code]}, #{get_geo_ip.country_code if get_geo_ip.success}",:order=>'distance')
+				@posts = Post.within(20, :origin =>"#{cookies[:zip_code]}, #{get_geo_ip.country_code if get_geo_ip.success}",:order=>'distance') if cookies[:zip_code]
 				@posts.sort_by_distance_from(cookies[:zip_code])
 			end
 			@posts = Post.all if Rails.env == "development"
