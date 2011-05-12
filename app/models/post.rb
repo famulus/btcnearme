@@ -7,6 +7,6 @@ class Post < ActiveRecord::Base
 
 
 	validates_presence_of :zip_code
-	validates_presence_of :email
+	validates_presence_of :email, :message => "required to post"
 	validates_uniqueness_of :email, :scope => :buying_or_selling
 end
