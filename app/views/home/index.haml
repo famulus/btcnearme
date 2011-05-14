@@ -30,10 +30,8 @@
 -if @posts.present?
   .spacer
   #left.small
-
     %h4="Buying"
     -if @buying.present?  
-
       %table
         / %th Distance
         / %th Email
@@ -43,10 +41,9 @@
             %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}",:encode => "javascript"})
             %td.button_to=button_to("delete",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
     -else
-      buyers      
+      No buyers near you      
   #right.small
-    %h4="Selling"
-  
+    %h4="Selling"  
     -if @selling.present?
       %table
         / %th Distance
@@ -59,7 +56,3 @@
     -else
       No sellers near you
   .clear
-    
-/ -if @posts.blank?
-/   You are the first person to trade BTC in this area! 
-  
