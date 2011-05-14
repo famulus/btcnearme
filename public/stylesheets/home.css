@@ -39,9 +39,6 @@
 .button_to input{
 	margin:0;
 }
-#footer{
-	margin-top:150px;
-}
 .small{
 	font-size:small;	
 }
@@ -50,7 +47,7 @@
 	margin: 0;
 }
 .spacer{
-	margin-top:60px;
+	margin-top:65px;
 }
 .text-left{
 	text-align:left;
