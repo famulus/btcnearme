@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 		@post = Post.new
 		if cookies[:zip_code].present?
 			if Rails.env == "production"
-				@posts = Post.within(40, :origin =>"#{cookies[:zip_code]}, #{get_geo_ip.country_code if get_geo_ip.success}",:order=>'distance') if cookies[:zip_code]
+				@posts = Post.within(60, :origin =>"#{cookies[:zip_code]}, #{get_geo_ip.country_code if get_geo_ip.success}",:order=>'distance') if cookies[:zip_code]
 				@posts.sort_by_distance_from(cookies[:zip_code])
 			else
 				@posts = Post.all
@@ -24,7 +24,10 @@ class HomeController < ApplicationController
 		@post.save
 		cookies[:zip_code] = @post.zip_code if @post.zip_code.present?
 		cookies[:email] = @post.email if @post.valid?
-		redirect_to({:controller => :home,:action => :index}, :flash => {:error => @post.errors.full_messages.join(", ")})
+		if @post.valid?
+			redirect_to({:controller => :home,:action => :index}, :flash => {:error => @post.errors.full_messages.join(", ")})
+		else
+		end
 	end
 	
 
