@@ -5,20 +5,17 @@
 .clear { clear: both; }
 
 .flash {
-/*    text-align: center;*/
-    /*padding*/:    .3em .4em;
+    text-align: center;
     clear:              both;
     max-width:  30.923em; /* 610/13 */  
     *max-width: 45.750em; /* 610/13.3333 - for IE */
 }
 
 .flash.error {
-/*    bord	er: thin solid #8b0000;*/
     background: #ffc0cb;
 }
 
 .flash.notice, .flash.info {
-/*    border: thin solid #ff0;*/
     background: #ffe;
 }
 
