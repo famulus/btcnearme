@@ -9,6 +9,8 @@ class HomeController < ApplicationController
 			else
 				@posts = Post.all
 			end
+			@buying = @posts.select{|p| p.buying_or_selling == "buy"}
+			@selling = @posts.select{|p| p.buying_or_selling == "sell"}
 		end
 	end
 

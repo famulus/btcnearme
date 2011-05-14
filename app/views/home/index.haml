@@ -1,5 +1,3 @@
-%h1
-  BTC NEAR ME  
 %h2
   Find Bitcoin traders near you... settle in cash.
 %h4
@@ -30,30 +28,36 @@
 
 
 -if @posts.present?
-   
-  #left
-    %h4="Buying BTC near #{ cookies[:zip_code]}"
-    %table
-      %th Distance
-      %th Email
-      -@posts.select{|p| p.buying_or_selling == "buy"}.each do |post|
-        %tr
-          %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers" rescue ""
-          %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}",:encode => "javascript"})
-          %td.button_to=button_to("delete",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
-      
-  #right
-    %h4="Selling BTC near #{ cookies[:zip_code]}"
-  
-    %table
-      %th Distance
-      %th Email
-      -@posts.select{|p| p.buying_or_selling == "sell"}.each do |post|
-        %tr
-          %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers" rescue ""
-          %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}"})
-          %td.button_to=button_to("delete",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
+  .spacer
+  #left.small
 
+    %h4="Buying"
+    -if @buying.present?  
+
+      %table
+        %th Distance
+        %th Email
+        -@buying.each do |post|
+          %tr
+            %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers" rescue ""
+            %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}",:encode => "javascript"})
+            %td.button_to=button_to("delete",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
+    -else
+      buyers      
+  #right.small
+    %h4="Selling"
+  
+    -if @selling.present?
+      %table
+        %th Distance
+        %th Email
+        -@selling.each do |post|
+          %tr
+            %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers" rescue ""
+            %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}"})
+            %td.button_to=button_to("delete",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
+    -else
+      No sellers near you
   .clear
     
 / -if @posts.blank?
