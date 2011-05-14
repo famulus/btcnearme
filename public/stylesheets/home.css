@@ -40,7 +40,12 @@
 	margin:0;
 }
 #footer{
-	margin-top:200px;
+	margin-top:150px;
+}
+.small{
+	font-size:small;	
 }
 
-
+.zero_margin{
+	margin: 0;
+}
