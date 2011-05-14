@@ -16,33 +16,27 @@ class HomeController < ApplicationController
 
 	def create_post
 		@post = Post.new
-
 		@post.update_attributes(params[:post])
 		@post.lat = MultiGeocoder.geocode("#{@post.zip_code.to_s}, #{get_geo_ip.country_code if get_geo_ip.success}").lat rescue nil
 		@post.lng = MultiGeocoder.geocode("#{@post.zip_code.to_s}, #{get_geo_ip.country_code if get_geo_ip.success}").lng rescue nil	
-
 		@post.save
 		cookies[:zip_code] = @post.zip_code if @post.zip_code.present?
 		cookies[:email] = @post.email if @post.valid?
 		redirect_to({:controller => :home,:action => :index}, :flash => {:error => @post.errors.full_messages.join(", ")})
-
 	end
 	
+
 	def get_geo_ip
-		IpGeocoder.geocode(request.remote_ip)
-		
+		IpGeocoder.geocode(request.remote_ip)		
 	end
+
 
 	def delete_post
 		if cookies[:email] == params[:email]
 			p =Post.find_by_email(params[:email])
 			p.destroy
-
 		end
 		redirect_to({:controller => :home,:action => :index}, :flash => {:notice => "Email deleted sucessfully"})
-
 	end 
-
-
 
 end

@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 source 'http://gems.github.com'
 source 'http://gems.rubyforge.org'
+source 'http://gemcutter.org'
 
 gem 'rails', '3.0.4.rc1'
 
@@ -11,7 +12,6 @@ gem 'sqlite3'
 gem 'haml'
 gem 'geokit-rails3'
 gem 'hirb'
-
 
 
 # Use unicorn as the web server
@@ -33,6 +33,6 @@ gem 'hirb'
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
-# group :development, :test do
-#   gem 'webrat'
-# end
+group :development, :test do
+	gem 'watchr'
+end

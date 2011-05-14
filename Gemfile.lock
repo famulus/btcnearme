@@ -2,6 +2,7 @@ GEM
   remote: http://rubygems.org/
   remote: http://gems.github.com/
   remote: http://gems.rubyforge.org/
+  remote: http://gemcutter.org/
   specs:
     abstract (1.0.0)
     actionmailer (3.0.4.rc1)
@@ -72,6 +73,7 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.27)
+    watchr (0.7)
 
 PLATFORMS
   ruby
@@ -82,3 +84,4 @@ DEPENDENCIES
   hirb
   rails (= 3.0.4.rc1)
   sqlite3
+  watchr
