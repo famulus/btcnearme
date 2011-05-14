@@ -33,8 +33,6 @@
     %h4="Buying"
     -if @buying.present?  
       %table
-        / %th Distance
-        / %th Email
         -@buying.each do |post|
           %tr
             %td="#{number_with_precision(post.distance, {:precision =>1 })} km" rescue ""
@@ -46,8 +44,6 @@
     %h4="Selling"  
     -if @selling.present?
       %table
-        / %th Distance
-        / %th Email
         -@selling.each do |post|
           %tr
             %td="#{number_with_precision(post.distance, {:precision =>1 })} km" rescue ""
