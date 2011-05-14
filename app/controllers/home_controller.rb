@@ -25,10 +25,9 @@ class HomeController < ApplicationController
 		cookies[:zip_code] = @post.zip_code if @post.zip_code.present?
 		cookies[:email] = @post.email if @post.valid?
 		if @post.valid?
-			redirect_to({:controller => :home,:action => :index}, :flash => {:error => @post.errors.full_messages.join(", ")})
+			redirect_to({:controller => :home,:action => :index}, :flash => {:notice => "Post success!"})
 		else
-			redirect_to({:controller => :home,:action => :index}, :flash => {:notice => "Post successful!"})
-
+			redirect_to({:controller => :home,:action => :index}, :flash => {:error => @post.errors.full_messages.join(", ")})
 		end
 	end
 	
