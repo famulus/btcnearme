@@ -39,7 +39,7 @@
         %th Email
         -@buying.each do |post|
           %tr
-            %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers" rescue ""
+            %td="#{number_with_precision(post.distance, {:precision =>1 })} km" rescue ""
             %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}",:encode => "javascript"})
             %td.button_to=button_to("delete",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
     -else
@@ -53,7 +53,7 @@
         %th Email
         -@selling.each do |post|
           %tr
-            %td="#{number_with_precision(post.distance, {:precision =>1 })} kilometers" rescue ""
+            %td="#{number_with_precision(post.distance, {:precision =>1 })} km" rescue ""
             %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}"})
             %td.button_to=button_to("delete",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
     -else
