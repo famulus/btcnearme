@@ -12,6 +12,6 @@ class Post < ActiveRecord::Base
 	
 	scope :buying, where({buying_or_selling: "buy"})
 	scope :selling, where({buying_or_selling: "sell"})
-	scope :old, where("created_at > ?", (Time.now-7.days))
+	scope :old, where("created_at < ?", (Time.now-7.days))
 
 end
