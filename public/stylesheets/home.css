@@ -10,7 +10,6 @@
     max-width:  30.923em; /* 610/13 */  
     *max-width: 45.750em; /* 610/13.3333 - for IE */
 }
-
 .flash.error {
     background: #ffc0cb;
 }
@@ -38,7 +37,6 @@
 .small{
 	font-size:small;	
 }
-
 .zero_margin{
 	margin: 0;
 }
