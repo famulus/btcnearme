@@ -6,7 +6,7 @@
   Negotiate terms via email. Meet in public with wireless internet!
 	
 
-%hr
+.spacer
 =form_for(@post, :url => {:controller => :home,:action => :create_post}) do |f|
   .flash.error
     =flash[:error]
@@ -14,7 +14,7 @@
     =flash[:notice]
 
   I want to 
-  =f.select(:buying_or_selling, options_for_select(["buy","sell"]))
+  =f.select(:buying_or_selling, options_for_select(["buy","sell"]),{},{})
   /=f.text_field(:quantity)
   BTC
   %br/
@@ -28,7 +28,6 @@
   .small.zero_margin
     (emails shown publicly, email optional)
 
-%hr
 
 -if @posts.present?
    
