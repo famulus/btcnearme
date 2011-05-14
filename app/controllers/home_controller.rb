@@ -27,6 +27,8 @@ class HomeController < ApplicationController
 		if @post.valid?
 			redirect_to({:controller => :home,:action => :index}, :flash => {:error => @post.errors.full_messages.join(", ")})
 		else
+			redirect_to({:controller => :home,:action => :index}, :flash => {:notice => "Post successful!"})
+
 		end
 	end
 	
