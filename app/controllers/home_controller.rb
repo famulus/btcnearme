@@ -19,7 +19,6 @@ class HomeController < ApplicationController
 
 	def create_post
 		@ip_location = get_geo_ip(request.remote_ip)
-
 		@post = Post.new
 		@post.update_attributes(params[:post])
 		@post.lat = MultiGeocoder.geocode("#{@post.zip_code}, #{@ip_location.country_code if @ip_location.success}").lat rescue nil
@@ -44,6 +43,9 @@ class HomeController < ApplicationController
 		end
 		redirect_to({:controller => :home,:action => :index}, :flash => {:notice => "Email deleted sucessfully"})
 	end 
+
+
+
 
 	private 
 
