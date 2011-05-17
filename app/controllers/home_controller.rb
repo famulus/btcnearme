@@ -4,9 +4,14 @@ class HomeController < ApplicationController
 		@post = Post.new
 		if cookies[:zip_code].present?
 			if Rails.env == "production"
-				@ip_location = get_geo_ip(request.remote_ip)
-				@posts = Post.within(500, :origin =>"#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}",:order=>'distance') 
-				@posts.sort_by_distance_from(cookies[:zip_code]) # order not supported in Rails 3 geokit
+				begin
+					@ip_location = get_geo_ip(request.remote_ip)
+					@posts = Post.within(500, :origin =>"#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}",:order=>'distance') 
+					@posts.sort_by_distance_from(cookies[:zip_code]) # order not supported in Rails 3 geokit
+				rescue 
+					@posts = []
+					flash[:error]= "Whoops! We had a problem locating you! Maybe try again?"
+				end
 			else
 				@posts = Post.all #Google's API doesn't work locally yet
 			end
