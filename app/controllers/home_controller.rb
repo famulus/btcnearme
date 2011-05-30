@@ -27,8 +27,9 @@ class HomeController < ApplicationController
 		@ip_location = get_geo_ip(request.remote_ip)
 		@post = Post.new
 		@post.update_attributes(params[:post])
-		@post.lat = MultiGeocoder.geocode("#{@post.zip_code}, #{@ip_location.country_code if @ip_location.success}").lat rescue nil
-		@post.lng = MultiGeocoder.geocode("#{@post.zip_code}, #{@ip_location.country_code if @ip_location.success}").lng rescue nil	
+		geo_results = MultiGeocoder.geocode("#{@post.zip_code}, #{@ip_location.country_code if @ip_location.success}")
+		@post.lat = geo_results.lat 
+		@post.lng = geo_results.lng 
 		@post.save
 		cookies[:zip_code] = @post.zip_code if @post.zip_code.present?
 		cookies[:email] = @post.email if @post.valid?
