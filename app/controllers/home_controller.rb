@@ -7,7 +7,7 @@ class HomeController < ApplicationController
 			if Rails.env == "production"
 				begin
 					@ip_location = get_geo_ip(request.remote_ip)
-					@posts = Post.within(300, :origin =>"#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}",:order=>'distance') 
+					@posts = Post.within(300, :origin =>"#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}") 
 					@posts.sort_by_distance_from(cookies[:zip_code]) # order not supported in Rails 3 geokit
 				rescue 
 					@posts = []
