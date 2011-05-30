@@ -15,18 +15,18 @@ class HomeController < ApplicationController
 				end
 				
 				begin
-					@posts = Post.within(300, :order=>'distance asc', :origin => origin_string) 
+					@posts = Post.within(300, :origin => origin_string).order('distance desc') 
 				rescue 
 					@posts = []
 					flash[:error]= "Whoops! We had a problem locating you! Maybe try again? (error finding within distance)"
 				end
 
-				begin
-					@posts.sort_by_distance_from(origin_string) # order not supported in Rails 3 geokit
-				rescue 
-					@posts = []
-					flash[:error]= "Whoops! We had a problem locating you! Maybe try again? (error sorting by distance)"
-				end
+				# begin
+				# 	@posts.sort_by_distance_from(origin_string) # order not supported in Rails 3 geokit
+				# rescue 
+				# 	@posts = []
+				# 	flash[:error]= "Whoops! We had a problem locating you! Maybe try again? (error sorting by distance)"
+				# end
 
 
 			else
