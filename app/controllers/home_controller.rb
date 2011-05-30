@@ -14,18 +14,18 @@ class HomeController < ApplicationController
 				end
 				
 				begin
-					@posts = Post.within(300, :origin =>"#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}") 
+					@posts = Post.within(300, :order=>'distance', :origin =>"#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}") 
 				rescue 
 					@posts = []
 					flash[:error]= "Whoops! We had a problem locating you! Maybe try again? (error finding within distance)"
 				end
 
-				begin
-					@posts.sort_by_distance_from(cookies[:zip_code]) # order not supported in Rails 3 geokit
-				rescue 
-					@posts = []
-					flash[:error]= "Whoops! We had a problem locating you! Maybe try again? (error sorting by distance)"
-				end
+				# begin
+				# 	@posts.sort_by_distance_from(cookies[:zip_code]) # order not supported in Rails 3 geokit
+				# rescue 
+				# 	@posts = []
+				# 	flash[:error]= "Whoops! We had a problem locating you! Maybe try again? (error sorting by distance)"
+				# end
 
 
 			else
