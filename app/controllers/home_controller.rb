@@ -15,7 +15,7 @@ class HomeController < ApplicationController
 				end
 				
 				begin
-					@posts = Post.within(300, :origin => origin_string).order('distance desc') 
+					@posts = Post.within(300, :origin => origin_string).order('distance asc') 
 				rescue 
 					@posts = []
 					flash[:error]= "Whoops! We had a problem locating you! Maybe try again? (error finding within distance)"
