@@ -3,14 +3,14 @@ source 'http://gems.github.com'
 source 'http://gems.rubyforge.org'
 source 'http://gemcutter.org'
 
-gem 'rails', '3.0.4.rc1'
+gem 'rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
 gem 'haml'
-gem 'geokit-rails3'
+gem "geokit-rails3", "~> 0.1.3"
 gem 'hirb'
 
 
