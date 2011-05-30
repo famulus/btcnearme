@@ -22,7 +22,7 @@ class HomeController < ApplicationController
 				end
 
 				begin
-					@posts.sort_by{|p| p.distance} # order not supported in Rails 3 geokit
+					@posts.sort_by_distance_from(origin_string) # order not supported in Rails 3 geokit
 				rescue 
 					@posts = []
 					flash[:error]= "Whoops! We had a problem locating you! Maybe try again? (error sorting by distance)"
