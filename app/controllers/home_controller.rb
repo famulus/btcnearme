@@ -4,7 +4,6 @@ class HomeController < ApplicationController
 		@post = Post.new
 
 		if cookies[:zip_code].present?
-			if Rails.env == "production"
 
 				begin
 					@ip_location = get_geo_ip(request.remote_ip)
@@ -15,9 +14,6 @@ class HomeController < ApplicationController
 					flash[:error]= "Whoops! We had a problem locating you! Maybe try again?"
 				end
 
-			else
-				@posts = Post.all #Google's API doesn't work locally yet
-			end
 			@buying = @posts.select{|p| p.buying_or_selling == "buy"}
 			@selling = @posts.select{|p| p.buying_or_selling == "sell"}
 		end
