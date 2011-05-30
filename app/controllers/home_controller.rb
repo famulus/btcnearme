@@ -8,7 +8,7 @@ class HomeController < ApplicationController
 				begin
 					@ip_location = get_geo_ip(request.remote_ip)
 					origin_string = "#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}"
-					@posts = Post.within(300, :origin => origin_string).order('distance asc') 
+					@posts = Post.within(500, :origin => origin_string).order('distance asc') 
 				rescue 
 					@posts = []
 					flash[:error]= "Whoops! We had a problem locating you! Maybe try again?"
