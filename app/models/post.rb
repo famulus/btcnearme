@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
 
 
 	
-	validates :email, {:presence => { :message => "^Here ya go! If you want to post your email... provide an email" }, :uniqueness => true}
+	validates :email, {:presence => { :message => "^Sweet!     If later you want to post? provide an email." }, :uniqueness => true}
 	validates :zip_code, :presence => true
 	
 	scope :buying, where({buying_or_selling: "buy"})
