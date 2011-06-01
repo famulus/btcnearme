@@ -6,10 +6,6 @@ class Post < ActiveRecord::Base
 										:lng_column_name => :lng
 
 
-	# validates_presence_of :zip_code
-	# validates_presence_of :email, :message => "required to post"	
-	# validates_uniqueness_of :email, :scope => :buying_or_selling
-	# validates_uniqueness_of :email,:email_format => true
 	
 	validates :email, {:presence => { :message => "^Here ya go! If you want to post your email... provide an email" }, :uniqueness => true}
 	validates :zip_code, :presence => true
