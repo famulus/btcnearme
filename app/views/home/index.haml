@@ -12,7 +12,7 @@
     =flash[:notice]
 
   I want to 
-  =f.select(:buying_or_selling, options_for_select(["buy","sell"]),{},{})
+  =f.select(:buying_or_selling, options_for_select(["buy","sell"].reverse),{},{})
   /=f.text_field(:quantity)
   BTC
   %br/
