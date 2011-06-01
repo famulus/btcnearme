@@ -10,7 +10,7 @@ class HomeController < ApplicationController
 					origin_string = "#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}"
 					@posts = Post.within(500, :origin => origin_string).order('distance asc') 
 				rescue 
-					@posts = []
+					@posts = Post.all
 					flash[:error]= "Whoops! We had a problem locating you! Maybe try again?"
 				end
 
