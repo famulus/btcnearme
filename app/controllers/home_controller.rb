@@ -5,14 +5,14 @@ class HomeController < ApplicationController
 
 		if cookies[:zip_code].present?
 
-				begin
-					@ip_location = get_geo_ip(request.remote_ip)
-					origin_string = "#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}"
-					@posts = Post.within(500, :origin => origin_string).order('distance asc') 
-				rescue 
-					@posts = Post.all
-					flash[:error]= "Whoops! We had a problem locating you! Maybe try again?"
-				end
+			begin
+				@ip_location = get_geo_ip(request.remote_ip)
+				origin_string = "#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}"
+				@posts = Post.within(500, :origin => origin_string).order('distance asc') 
+			rescue 
+				@posts = Post.all
+				flash[:error]= "Whoops! We had a problem locating you! Maybe try again?"
+			end
 
 			@buying = @posts.select{|p| p.buying_or_selling == "buy"}
 			@selling = @posts.select{|p| p.buying_or_selling == "sell"}
@@ -49,6 +49,25 @@ class HomeController < ApplicationController
 		redirect_to({:controller => :home,:action => :index}, :flash => {:notice => "Email deleted sucessfully"})
 	end 
 
+	def remove_email
+		@post = Post.new				
+	end
+
+	def remove_email_post
+		@post = Post.find_by_email(params[:post][:email])		
+		
+		if @post
+			message = "Had a problem deleting your email!"
+			message = "Email deleted!" if @post.destroy
+		else
+			message = "Hmm, don't have that email!"
+		end
+			
+		
+			
+		redirect_to({:controller => :home,:action => :index}, :flash => {:notice => message})
+
+	end
 
 
 

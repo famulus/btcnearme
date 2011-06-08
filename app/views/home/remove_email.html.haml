@@ -1,0 +1,10 @@
+=form_for(@post, :url => {:controller => :home,:action => :remove_email_post}) do |f|
+  / .flash.error
+  /   =flash[:error]
+  / .flash.notice
+  /   =flash[:notice]
+
+  Your email:
+  =f.text_field(:email)
+  =f.submit "remove email"
+
