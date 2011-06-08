@@ -24,7 +24,9 @@
   =f.text_field(:email)
   =submit_tag("Post")
   .small.zero_margin
-    (emails shown publicly, email optional for viewing)
+    emails shown publicly. email optional for viewing. 
+    =link_to("fake email account.","http://www.mailinator.com/",{:target => "_blank"} )
+    
 
 
 -if @posts.present?
