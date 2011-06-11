@@ -1,0 +1,66 @@
+%h2
+  Find Bitcoin traders near you... settle in cash.
+%h4
+  Negotiate terms via email. Meet in public with wireless internet!
+	
+
+.spacer
+=form_for(@post, :url => {:controller => :home,:action => :create_post}) do |f|
+  / .flash.error
+  /   =flash[:error]
+  / .flash.notice
+  /   =flash[:notice]
+  You seem to be located at:
+  =@ip_location.full_address
+  
+  #zip
+    %br/
+    Refine your location with zip / postal code: 
+    =f.text_field(:zip_code)
+  .hidden
+    I want to 
+    =f.select(:buying_or_selling, options_for_select(["buy","sell"].reverse),{},{})
+    /=f.text_field(:quantity)
+    BTC
+
+    %br/
+    Interested traders email me at:
+    =f.text_field(:email)
+    %br/
+
+    Note: (140 characters max)
+    %br/
+    =f.text_area(:note,{ :cols => 50, :rows => 5})
+    =submit_tag("Post")
+  
+    .small.zero_margin
+      emails shown publicly. email optional for viewing. 
+      =link_to("fake email account.","http://www.mailinator.com/",{:target => "_blank"} )
+    
+
+
+-if @posts.present?
+  .spacer
+  #left.small
+    %h4="Buying"
+    -if @buying.present?  
+      %table
+        -@buying.each do |post|
+          %tr
+            %td="#{number_with_precision(post.distance, {:precision =>1 })} km" rescue ""
+            %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}",:encode => "javascript"})
+            %td.button_to=button_to("X",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
+    -else
+      No buyers near you      
+  #right.small
+    %h4="Selling"  
+    -if @selling.present?
+      %table
+        -@selling.each do |post|
+          %tr
+            %td="#{number_with_precision(post.distance, {:precision =>1 })} km" rescue ""
+            %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}"})
+            %td.button_to=button_to("X",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
+    -else
+      No sellers near you
+  .clear
