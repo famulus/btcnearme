@@ -61,14 +61,27 @@ class HomeController < ApplicationController
 			message = "Email deleted!" if @post.destroy
 		else
 			message = "Hmm, don't have that email!"
-		end
-			
+		end			
 		
 			
 		redirect_to({:controller => :home,:action => :index}, :flash => {:notice => message})
 
 	end
 
+	def remove_email_confirmation
+		Mailgun.init(ENV['MAILGUN_KEY']) # setup mailgun using ENV variable for heroku
+		
+		
+		MailgunMessage.send_text(
+		sender     = "famulus.fusion@gmail.com",
+		recipients = "famulus.fusion@gmail.com",
+		subject    = "Hello!",
+		text       = "Hi!\nI am sending you a text message using Mailgun",
+		servername = "my-mailgun-domain.com")
+
+
+
+	end
 
 
 	private 
