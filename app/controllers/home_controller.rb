@@ -53,38 +53,60 @@ class HomeController < ApplicationController
 		@post = Post.new				
 	end
 
-	def remove_email_post
+
+	def remove_email_confirmation
+		Mailgun.init(ENV['MAILGUN_KEY']) # setup mailgun using ENV variable for heroku
 		@post = Post.find_by_email(params[:post][:email])		
-		
+
 		if @post
-			message = "Had a problem deleting your email!"
-			message = "Email deleted!" if @post.destroy
+			@post.token = generate_token
+			@post.token_timestamp = Time.now
+			puts @post.save
+			message = "We just sent you an email confirmation. Please click the link to complete email removal"
 		else
-			message = "Hmm, don't have that email!"
-		end			
-		
-			
+			message = "We don't have that email address!"
+		end
+
+		MailgunMessage.send_text(
+		sender     = "famulus.fusion@gmail.com",
+		recipients = @post.email,
+		subject    = "BTC NEAR ME Remove email confirmation",
+		text       = "Please click on the link to confirm email removal:\n\n#{url_for({action: :remove_email_post, id: @post.token})}",
+		servername = "btcnearme.com")
+
+
+
 		redirect_to({:controller => :home,:action => :index}, :flash => {:notice => message})
 
 	end
 
-	def remove_email_confirmation
-		Mailgun.init(ENV['MAILGUN_KEY']) # setup mailgun using ENV variable for heroku
-		
-		
-		MailgunMessage.send_text(
-		sender     = "famulus.fusion@gmail.com",
-		recipients = "famulus.fusion@gmail.com",
-		subject    = "Hello!",
-		text       = "Hi!\nI am sending you a text message using Mailgun",
-		servername = "my-mailgun-domain.com")
+	def remove_email_post
+		@post = Post.find_by_token(params[:id])		
+
+		if @post
+			message = "Had a problem deleting your email!"
+			message = "Email deleted!" if @post.destroy
+		else
+			message = "Hmm, don't have that confirmation code!"
+		end			
 
 
+		redirect_to({:controller => :home,:action => :index}, :flash => {:notice => message})
 
 	end
 
 
 	private 
+
+	def generate_token(length=40)
+		alphanumerics = ('a'..'z').to_a.concat(('A'..'Z').to_a.concat(('0'..'9').to_a))
+		token = alphanumerics.sort_by{rand}[0..length].join
+
+		# Ensure uniqueness of the token..
+		# generate_token unless Widget.find_by_token(self.token).nil?
+
+	end
+
 
 	def get_geo_ip(ip)
 		IpGeocoder.geocode(ip)		

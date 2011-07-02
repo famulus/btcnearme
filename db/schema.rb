@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110504125225) do
+ActiveRecord::Schema.define(:version => 20110702204607) do
 
   create_table "locations", :force => true do |t|
     t.datetime "created_at"
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(:version => 20110504125225) do
     t.text     "zip_code",          :limit => 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "note"
+    t.string   "token"
+    t.datetime "token_timestamp"
   end
 
   add_index "posts", ["lat"], :name => "index_posts_on_lat"
