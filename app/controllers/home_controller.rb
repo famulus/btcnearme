@@ -63,16 +63,18 @@ class HomeController < ApplicationController
 			@post.token_timestamp = Time.now
 			puts @post.save
 			message = "We just sent you an email confirmation. Please click the link to complete email removal"
+			# email confirm message
+			MailgunMessage.send_text(
+			sender     = "famulus.fusion@gmail.com",
+			recipients = @post.email,
+			subject    = "BTC NEAR ME Remove email confirmation",
+			text       = "Please click on the link to confirm email removal:\n\n#{url_for({action: :remove_email_post, id: @post.token})}",
+			servername = "btcnearme.com")
+
 		else
 			message = "We don't have that email address!"
 		end
 
-		MailgunMessage.send_text(
-		sender     = "famulus.fusion@gmail.com",
-		recipients = @post.email,
-		subject    = "BTC NEAR ME Remove email confirmation",
-		text       = "Please click on the link to confirm email removal:\n\n#{url_for({action: :remove_email_post, id: @post.token})}",
-		servername = "btcnearme.com")
 
 
 
