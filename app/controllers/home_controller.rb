@@ -18,7 +18,11 @@ class HomeController < ApplicationController
 		end
 	end
 
+	def map
+						@ip_location = get_geo_ip(request.remote_ip)
 
+		render(layout: false)
+	end
 
 	def create_post
 		@ip_location = get_geo_ip(request.remote_ip)
