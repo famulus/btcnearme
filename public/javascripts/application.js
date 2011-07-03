@@ -12,6 +12,10 @@ function displayError(positionError) {
 }
 
 
+
+
+
+
 function initialize_map(position) {
 	var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
@@ -22,8 +26,22 @@ function initialize_map(position) {
 	};
 
 	var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+	var marker = new google.maps.Marker({
+		position: latlng,
+		title:"Hello World!"
+	});
+
+	// To add the marker to the map, call setMap();
+	marker.setMap(map);  
+
 
 }
+
+
+
+
+
+
 
 function initialize(){
 	
