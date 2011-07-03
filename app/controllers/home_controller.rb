@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
 
+
+
 	def index
 		@post = Post.new
-
 		if cookies[:zip_code].present?
-
 			begin
 				@ip_location = get_geo_ip(request.remote_ip)
 				origin_string = "#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}"
@@ -13,7 +13,6 @@ class HomeController < ApplicationController
 				@posts = Post.all
 				flash[:error]= "Whoops! We had a problem locating you! Maybe try again?"
 			end
-
 			@buying = @posts.select{|p| p.buying_or_selling == "buy"}
 			@selling = @posts.select{|p| p.buying_or_selling == "sell"}
 		end
@@ -49,6 +48,8 @@ class HomeController < ApplicationController
 		redirect_to({:controller => :home,:action => :index}, :flash => {:notice => "Email deleted sucessfully"})
 	end 
 
+
+
 	def remove_email
 		@post = Post.new				
 	end
@@ -70,32 +71,34 @@ class HomeController < ApplicationController
 			subject    = "BTC NEAR ME Remove email confirmation",
 			text       = "Please click on the link to confirm email removal:\n\n#{url_for({action: :remove_email_post, id: @post.token})}",
 			servername = "btcnearme.com")
-
 		else
 			message = "We don't have that email address!"
 		end
-
-
-
-
 		redirect_to({:controller => :home,:action => :index}, :flash => {:notice => message})
 
 	end
 
-	def remove_email_post
-		@post = Post.find_by_token(params[:id])		
 
+
+	def remove_email_post		
+		@post = Post.find_by_token(params[:id])		
 		if @post
 			message = "Had a problem deleting your email!"
 			message = "Email deleted!" if @post.destroy
 		else
 			message = "Hmm, don't have that confirmation code!"
 		end			
-
-
 		redirect_to({:controller => :home,:action => :index}, :flash => {:notice => message})
-
 	end
+
+
+
+
+
+
+
+
+
 
 
 	private 
