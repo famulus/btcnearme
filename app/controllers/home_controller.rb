@@ -2,13 +2,14 @@ class HomeController < ApplicationController
 
 	def index
 		@post = Post.new
-
 		if cookies[:zip_code].present?
 
 			begin
 				@ip_location = get_geo_ip(request.remote_ip)
 				origin_string = "#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}"
 				@posts = Post.within(500, :origin => origin_string).order('distance asc') 
+				@post.country = @ip_location.country_code # use ip address to guess country code
+
 			rescue 
 				@posts = Post.all
 				flash[:error]= "Whoops! We had a problem locating you! Maybe try again?"
