@@ -13,7 +13,7 @@ gem 'haml'
 gem "geokit-rails3", "~> 0.1.3"
 gem 'hirb'
 gem 'dynamic_form'
-gem 'rake', '0.8.7'
+gem 'rake', '0.9.1'
 # Use unicorn as the web server
 # gem 'unicorn'
 
