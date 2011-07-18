@@ -7,7 +7,7 @@ class HomeController < ApplicationController
 
 			begin
 				@ip_location = get_geo_ip(request.remote_ip)
-				origin_string = [cookies[:zip],cookies[:country_code]].compact.join(", ")
+				origin_string = [cookies[:zip_code],cookies[:country_code]].compact.join(", ")
 				@posts = Post.within(500, :origin => origin_string).order('distance asc') 
 			rescue 
 				@posts = Post.all
