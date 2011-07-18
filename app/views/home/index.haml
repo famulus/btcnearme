@@ -34,24 +34,24 @@
 -if @posts.present?
   .spacer
   #left.small
-    %h4="Buying"
+    %h4="Buying BTC"
     -if @buying.present?  
       %table
         -@buying.each do |post|
           %tr
             %td="#{number_with_precision(post.distance, {:precision =>1 })} km" rescue ""
-            %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}",:encode => "javascript"})
+            %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}",:encode => "javascript",title:"#{time_ago_in_words(post.created_at)} old"})
             %td.button_to=button_to("X",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
     -else
       No buyers near you      
   #right.small
-    %h4="Selling"  
+    %h4="Selling BTC"  
     -if @selling.present?
       %table
         -@selling.each do |post|
           %tr
             %td="#{number_with_precision(post.distance, {:precision =>1 })} km" rescue ""
-            %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}"})
+            %td=mail_to(post.email,nil,{:subject => "Trade BTC near #{cookies[:zip_code]}",:encode => "javascript",title:"#{time_ago_in_words(post.created_at)} old"})
             %td.button_to=button_to("X",:action => :delete_post, :id => post.id, :email => cookies[:email]) if post.email == cookies[:email]
     -else
       No sellers near you
