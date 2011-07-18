@@ -2,22 +2,20 @@ class HomeController < ApplicationController
 
 	def index
 		@post = Post.new
-		if cookies[:zip_code].present?
 
-			begin
-				@ip_location = get_geo_ip(request.remote_ip)
-				origin_string = "#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}"
+		begin
+			@ip_location = get_geo_ip(request.remote_ip)
+			if cookies[:zip_code].present?
+				origin_string = "#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}"		
 				@posts = Post.within(500, :origin => origin_string).order('distance asc') 
-				@post.country = @ip_location.country_code	 # use ip address to guess country code
-
-			rescue 
-				@posts = Post.all
-				flash[:error]= "Whoops! We had a problem locating you! Maybe try again?"
 			end
-
-			@buying = @posts.select{|p| p.buying_or_selling == "buy"}
-			@selling = @posts.select{|p| p.buying_or_selling == "sell"}
+		rescue 
+			@posts = Post.all
+			flash[:error]= "Whoops! We had a problem locating you! Maybe try again?"
 		end
+		(@post.country = 	@ip_location.country_code) if @ip_location && @ip_location.success  # use ip address to guess country code
+		@buying = @posts.select{|p| p.buying_or_selling == "buy"}
+		@selling = @posts.select{|p| p.buying_or_selling == "sell"}
 	end
 
 
@@ -26,7 +24,7 @@ class HomeController < ApplicationController
 		@ip_location = get_geo_ip(request.remote_ip)
 		@post = Post.new
 		@post.update_attributes(params[:post])
-		geo_results = MultiGeocoder.geocode("#{@post.zip_code}, #{@ip_location.country_code if @ip_location.success}")
+		geo_results = MultiGeocoder.geocode([@post.zip_code, @post.country].join(", "))
 		@post.lat = geo_results.lat 
 		@post.lng = geo_results.lng 
 		@post.save
