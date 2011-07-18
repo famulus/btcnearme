@@ -7,7 +7,7 @@ class HomeController < ApplicationController
 
 			begin
 				@ip_location = get_geo_ip(request.remote_ip)
-				origin_string = "#{cookies[:zip_code]}, #{@ip_location.country_code if @ip_location.success}"
+				origin_string = [cookies[:zip],cookies[:country_code]].compact.join(", ")
 				@posts = Post.within(500, :origin => origin_string).order('distance asc') 
 			rescue 
 				@posts = Post.all
@@ -30,6 +30,7 @@ class HomeController < ApplicationController
 		@post.lng = geo_results.lng 
 		@post.save
 		cookies[:zip_code] = @post.zip_code if @post.zip_code.present?
+		cookies[:country_code] = @post.country if @post.country.present?
 		cookies[:email] = @post.email if @post.valid?
 		if @post.valid?
 			redirect_to({:controller => :home,:action => :index}, :flash => {:notice => "Post success!"})
